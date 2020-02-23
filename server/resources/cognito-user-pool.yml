@@ -26,6 +26,32 @@ Resources:
       ExplicitAuthFlows:
         - ADMIN_NO_SRP_AUTH
       GenerateSecret: false
+      AllowedOAuthFlowsUserPoolClient: true
+      SupportedIdentityProviders:
+        - Facebook
+        - COGNITO
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthScopes:
+        - phone
+        - email
+        - openid
+        - profile
+        - aws.cognito.signin.user.admin
+      CallbackURLs:
+      # find way to switch this around in production!
+        - http://localhost:3000
+      LogoutURLs:
+        - http://localhost:3000
+  CognitoUserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties: 
+      # CustomDomainConfig: 
+      #   CustomDomainConfigType
+      Domain: wiabapp
+      UserPoolId: !Ref CognitoUserPool
+  
 
 # Print out the Id of the User Pool that is created
 Outputs:
