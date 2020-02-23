@@ -4,7 +4,7 @@
   "description": "A Node.js starter for the Serverless Framework with async/await and unit test support",
   "main": "handler.js",
   "scripts": {
-    "start":"SLS_COGNITO_IDENTITY_ID=us-west-2:d191f23f-c2c0-4576-8a71-7c8c211c221b serverless offline start --port 5000",
+    "start": "SLS_COGNITO_IDENTITY_ID=us-west-2:d191f23f-c2c0-4576-8a71-7c8c211c221b serverless offline start --port 5000",
     "test": "serverless-bundle test"
   },
   "author": "",
