@@ -1,0 +1,14 @@
+# THIS SHOULD BE GITIGNORED IN YOUR ACTUAL REPOSITORY
+Resources:
+  CognitoUserPoolIdentityProvider:
+    Type: AWS::Cognito::UserPoolIdentityProvider
+    Properties:
+      UserPoolId: !Ref UserPool
+      ProviderName: "Facebook"
+      ProviderDetails:
+        client_id: "YourFacebookAppId"
+        client_secret: "YourFacebookAppSecret"
+        authorize_scopes: "public_profile,email"
+      ProviderType: "Facebook"
+      AttributeMapping:
+        email: "email"

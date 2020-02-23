@@ -1,0 +1,26 @@
+{
+  "name": "serverless-nodejs-starter",
+  "version": "1.1.0",
+  "description": "A Node.js starter for the Serverless Framework with async/await and unit test support",
+  "main": "handler.js",
+  "scripts": {
+    "start":"SLS_COGNITO_IDENTITY_ID=us-west-2:d191f23f-c2c0-4576-8a71-7c8c211c221b serverless offline start --port 5000",
+    "test": "serverless-bundle test"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnomalyInnovations/serverless-nodejs-starter.git"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.536.0",
+    "serverless-bundle": "^1.2.2",
+    "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-offline": "^5.3.3"
+  },
+  "dependencies": {
+    "stripe": "^7.9.1",
+    "uuid": "^3.3.3"
+  }
+}

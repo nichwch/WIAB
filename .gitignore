@@ -1,0 +1,4 @@
+# node modules
+client/node_modules
+server/node_modules
+server/resources/cognito-identity-providers.yml

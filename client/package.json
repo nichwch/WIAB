@@ -1,0 +1,36 @@
+{
+  "name": "empty-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "aws-amplify": "^1.1.40",
+    "react": "^16.9.0",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.9.0",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.4.0",
+    "react-stripe-elements": "^5.0.1"
+  },
+  "scripts": {
+    "start": "REACT_APP_API=https://8r6w7khy95.execute-api.us-west-2.amazonaws.com/dev REACT_APP_SITE=http://localhost:3000 react-scripts start",
+    "build": "REACT_APP_API=https://8r6w7khy95.execute-api.us-west-2.amazonaws.com/dev REACT_APP_SITE=http://localhost:3000 react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
