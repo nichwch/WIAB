@@ -1,4 +1,5 @@
 const apiurl = process.env.REACT_APP_API;
+const siteurl = process.env.REACT_APP_SITE;
 
 const dev = {
   STRIPE_KEY: "pk_test_v1amvR35uoCNduJfkqGB8RLD",
@@ -13,9 +14,16 @@ const dev = {
   },
   cognito: {
     REGION: "us-west-2",
-    USER_POOL_ID: "us-west-2_dXPk1GpU3",
-    APP_CLIENT_ID: "24t4hihk35ru90sun0ht7som04",
-    IDENTITY_POOL_ID: "us-west-2:371698d8-eae8-45a9-a524-bae7ec9c1c3f"
+    USER_POOL_ID: "us-west-2_9YvQL51n3",
+    APP_CLIENT_ID: "5b4hk15eol41apunttm71o7rmp",
+    IDENTITY_POOL_ID: "us-west-2:4954c07f-9234-47c1-bc30-d0d88f511c28"
+  },
+  oauth: {
+    domain: 'wiabapp.auth.us-west-2.amazoncognito.com',
+    scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+    redirectSignIn: siteurl+'',
+    redirectSignOut: siteurl+'',
+    responseType: 'token' // or 'token', note that REFRESH token will only be generated when the responseType is code
   }
 };
 

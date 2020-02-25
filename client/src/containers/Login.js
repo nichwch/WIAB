@@ -59,6 +59,14 @@ export default function Login(props) {
         >
           Login
         </LoaderButton>
+        <LoaderButton
+          block
+          bsSize="large"
+          isLoading={isLoading}
+          onClick={()=>{Auth.federatedSignIn({provider:'Facebook'})}}
+        >
+          Login With Facebook
+        </LoaderButton>
       </form>
     </div>
   );

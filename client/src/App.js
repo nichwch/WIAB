@@ -17,10 +17,12 @@ function App(props) {
   async function onLoad() {
     try {
       await Auth.currentSession();
+      alert("user!");
       userHasAuthenticated(true);
     }
     catch(e) {
       if (e !== 'No current user') {
+        console.log(e);
         alert(e);
       }
     }
