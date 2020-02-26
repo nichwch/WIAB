@@ -5,6 +5,7 @@ import { Link, withRouter } from "react-router-dom";
 // import { LinkContainer } from "react-router-bootstrap";
 
 import {Box, Flex, Heading,Text,Button} from "@chakra-ui/core";
+import { MdMenu } from "react-icons/md"
 
 import Routes from "./Routes";
 
@@ -68,8 +69,11 @@ function App(props) {
 
           {/* nav options, collapsable */}
           {/* collapsable menu button for mobile */}
-          <Box display={["block","block","none","none"]}
-               onClick={()=>{setShowMenu(!showMenu)}}
+          <Box
+              as={MdMenu} 
+              size="30px"
+              display={["block","block","none","none"]}
+              onClick={()=>{setShowMenu(!showMenu)}}
           >
             wew
           </Box>
@@ -77,6 +81,7 @@ function App(props) {
             display={[showMenu?"block":"none",showMenu?"block":"none","flex","flex"]}
             width={["100%","100%","auto","auto"]}
             alignItems="center"
+            textAlign={["right","right","left","left"]}
             flexGrow={1}
           >
             <MenuItem to="/hello">Item 1</MenuItem>
@@ -88,11 +93,13 @@ function App(props) {
             <React.Fragment>
               <Box display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]}
                    width={["100%","100%","auto","auto"]}
+                   textAlign={["right","right","left","left"]}
               >
                 <MenuItem to="/settings">Settings</MenuItem>
               </Box>
               <Box display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]}
                    width={["100%","100%","auto","auto"]}
+                   textAlign={["right","right","left","left"]}
               >
                 <Text onClick={handleLogout} fontSize="3xl" ml={3} mt={[3,3,0,0]} 
                 display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]} display="block">Log Out</Text>
@@ -104,11 +111,13 @@ function App(props) {
             <React.Fragment>
               <Box display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]}
                    width={["100%","100%","auto","auto"]}
+                   textAlign={["right","right","left","left"]}
               >
                 <MenuItem to="/signup">Sign Up</MenuItem>
               </Box>
               <Box display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]}
                    width={["100%","100%","auto","auto"]}
+                   textAlign={["right","right","left","left"]}
               >
                 <MenuItem to="/login">Sign In</MenuItem>
               </Box>
