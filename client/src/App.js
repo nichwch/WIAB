@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Auth, Hub } from "aws-amplify";
 import { Link, withRouter } from "react-router-dom";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+// import { Nav, Navbar, NavItem } from "react-bootstrap";
+// import { LinkContainer } from "react-router-bootstrap";
 
-import {Box, Flex, Heading,Text} from "@chakra-ui/core";
+import {Box, Flex, Heading,Text,Button} from "@chakra-ui/core";
 
 import Routes from "./Routes";
+
+const MenuItem = (props) => {
+  return (
+  <Text as={Link} to={props.to} {...props} fontSize="3xl" ml={3} mt={[2,2,0,0]} display="block">
+    {props.children}
+  </Text>
+  )
+}
 
 function App(props) {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -38,81 +46,82 @@ function App(props) {
 
   let navContents = (
     <React.Fragment>
-      <Text as={Link} to="/hello" fontSize="xl">Item 1</Text>
-      <Text as={Link} to="/hello" fontSize="xl">Item 2</Text>
-      <Text as={Link} to="/hello" fontSize="xl">Item 3</Text>
 
-      {/* login section, changes depending on auth status */}
-      {isAuthenticated?
-        <React.Fragment>
-          <Text as={Link} to="/settings" fontSize="xl">Settings</Text>
-          <Text onClick={handleLogout} fontSize="xl">Log Out</Text>
-        </React.Fragment>
-
-      :
-        <React.Fragment>
-          <Text as={Link} to="/signup" fontSize="xl">Sign Up</Text>
-          <Text as={Link} to="/login" fontSize="xl">Login</Text>
-        </React.Fragment>
-      }
     </React.Fragment>
   )
 
   return (
     !isAuthenticating && (
-      <Box>
-        {/* <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">Scratch</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullRight>
-              {isAuthenticated ? (
-                <>
-                  <LinkContainer to="/settings">
-                    <NavItem>Settings</NavItem>
-                  </LinkContainer>
-                  <NavItem onClick={handleLogout}>Logout</NavItem>
-                </>
-              ) : (
-                <>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar> */}
+      <Box p={[2,2,5,5]}>
         {/* navbar */}
-        <Flex p={5}>
-          <Heading as={Link} to="/" size="2xl">App</Heading>
-          {/* nav options, collapsable */}
-          {/* collapsable menu button for mobile */}
-
-          <Flex display={["none","none","block","block"]}>
-            {navContents}
+        <Flex
+          // p={5}
+          as="nav"
+          align="center"
+          justify="space-between"
+          wrap="wrap"
+          
+        >
+          <Flex align="center" mr={5}>
+            <Heading as={Link} to="/" size="2xl">App</Heading>
           </Flex>
 
+          {/* nav options, collapsable */}
+          {/* collapsable menu button for mobile */}
           <Box display={["block","block","none","none"]}
                onClick={()=>{setShowMenu(!showMenu)}}
           >
             wew
           </Box>
-          <Box display={[showMenu?"block":"none",showMenu?"block":"none","none","none"]}>
-            {navContents}
+          <Box 
+            display={[showMenu?"block":"none",showMenu?"block":"none","flex","flex"]}
+            width={["100%","100%","auto","auto"]}
+            alignItems="center"
+            flexGrow={1}
+          >
+            <MenuItem to="/hello">Item 1</MenuItem>
+            <MenuItem to="/hello1">Item 2</MenuItem>
+            <MenuItem to="/hello2">Item 3</MenuItem>
           </Box>
+          {/* login section, changes depending on auth status */}
+          {isAuthenticated?
+            <React.Fragment>
+              <Box display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]}
+                   width={["100%","100%","auto","auto"]}
+              >
+                <MenuItem to="/settings">Settings</MenuItem>
+              </Box>
+              <Box display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]}
+                   width={["100%","100%","auto","auto"]}
+              >
+                <Text onClick={handleLogout} fontSize="3xl" ml={3} mt={[3,3,0,0]} 
+                display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]} display="block">Log Out</Text>
+              </Box>
+
+            </React.Fragment>
+
+          :
+            <React.Fragment>
+              <Box display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]}
+                   width={["100%","100%","auto","auto"]}
+              >
+                <MenuItem to="/signup">Sign Up</MenuItem>
+              </Box>
+              <Box display={[showMenu?"block":"none",showMenu?"block":"none","block","block"]}
+                   width={["100%","100%","auto","auto"]}
+              >
+                <MenuItem to="/login">Sign In</MenuItem>
+              </Box>
+            </React.Fragment>
+          }
+
+          
+          
         </Flex>
 
 
         <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
-      </Box>
+        </Box>
     )
   );
 }
