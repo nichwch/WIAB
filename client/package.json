@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/core": "^0.6.0",
+    "@emotion/core": "^10.0.27",
+    "@emotion/styled": "^10.0.27",
     "aws-amplify": "^1.1.40",
+    "emotion-theming": "^10.0.27",
     "react": "^16.9.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.9.0",

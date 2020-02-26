@@ -6,6 +6,9 @@ import config from './config';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { ThemeProvider,CSSReset } from "@chakra-ui/core";
+import {customTheme} from "./theme"
+
 
 Amplify.configure({
   Auth: {
@@ -34,7 +37,10 @@ Amplify.configure({
 
 ReactDOM.render(
   <Router>
-    <App />
+    <ThemeProvider theme={customTheme}>
+      <CSSReset />
+      <App />
+    </ThemeProvider>
   </Router>,
   document.getElementById('root')
 );

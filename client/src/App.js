@@ -1,47 +1,67 @@
 import React, { useState, useEffect } from "react";
-import { Auth } from "aws-amplify";
+import { Auth, Hub } from "aws-amplify";
 import { Link, withRouter } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+
+import {Box, Flex, Heading,Text} from "@chakra-ui/core";
+
 import Routes from "./Routes";
-import "./App.css";
 
 function App(props) {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  const [showMenu, setShowMenu] = React.useState(false);
 
   useEffect(() => {
     onLoad();
   }, []);
 
   async function onLoad() {
-    try {
-      await Auth.currentSession();
-      alert("user!");
-      userHasAuthenticated(true);
-    }
-    catch(e) {
-      if (e !== 'No current user') {
-        console.log(e);
-        alert(e);
+    Hub.listen('auth',(data)=>{
+      const {payload} = data;
+      console.log("P",payload);
+      if(payload.event === 'signIn'){
+        userHasAuthenticated(true);
       }
-    }
+    });
 
     setIsAuthenticating(false);
   }
 
   async function handleLogout() {
     await Auth.signOut();
-
     userHasAuthenticated(false);
-
     props.history.push("/login");
   }
 
+  let navContents = (
+    <React.Fragment>
+      <Text as={Link} to="/hello" fontSize="xl">Item 1</Text>
+      <Text as={Link} to="/hello" fontSize="xl">Item 2</Text>
+      <Text as={Link} to="/hello" fontSize="xl">Item 3</Text>
+
+      {/* login section, changes depending on auth status */}
+      {isAuthenticated?
+        <React.Fragment>
+          <Text as={Link} to="/settings" fontSize="xl">Settings</Text>
+          <Text onClick={handleLogout} fontSize="xl">Log Out</Text>
+        </React.Fragment>
+
+      :
+        <React.Fragment>
+          <Text as={Link} to="/signup" fontSize="xl">Sign Up</Text>
+          <Text as={Link} to="/login" fontSize="xl">Login</Text>
+        </React.Fragment>
+      }
+    </React.Fragment>
+  )
+
   return (
     !isAuthenticating && (
-      <div className="App container">
-        <Navbar fluid collapseOnSelect>
+      <Box>
+        {/* <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
               <Link to="/">Scratch</Link>
@@ -69,9 +89,30 @@ function App(props) {
               )}
             </Nav>
           </Navbar.Collapse>
-        </Navbar>
+        </Navbar> */}
+        {/* navbar */}
+        <Flex p={5}>
+          <Heading as={Link} to="/" size="2xl">App</Heading>
+          {/* nav options, collapsable */}
+          {/* collapsable menu button for mobile */}
+
+          <Flex display={["none","none","block","block"]}>
+            {navContents}
+          </Flex>
+
+          <Box display={["block","block","none","none"]}
+               onClick={()=>{setShowMenu(!showMenu)}}
+          >
+            wew
+          </Box>
+          <Box display={[showMenu?"block":"none",showMenu?"block":"none","none","none"]}>
+            {navContents}
+          </Box>
+        </Flex>
+
+
         <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
-      </div>
+      </Box>
     )
   );
 }
