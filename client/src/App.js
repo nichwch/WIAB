@@ -28,13 +28,20 @@ function App(props) {
   }, []);
 
   async function onLoad() {
-    Hub.listen('auth',(data)=>{
-      const {payload} = data;
-      console.log("P",payload);
-      if(payload.event === 'signIn'){
-        userHasAuthenticated(true);
-      }
-    });
+    try{
+      await Auth.currentSession();
+      userHasAuthenticated(true);
+    }
+    catch(e){
+      console.log(e);
+      Hub.listen('auth',(data)=>{
+        const {payload} = data;
+        // console.log("P",payload);
+        if(payload.event === 'signIn'){
+          userHasAuthenticated(true);
+        }
+      });
+    }
 
     setIsAuthenticating(false);
   }
